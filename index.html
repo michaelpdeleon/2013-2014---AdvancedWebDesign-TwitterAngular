@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="twitterSearchApp">
+
+<!--
+ITI 332 Homework 8 - Twitter and AngularJS using Cloud 9 (http://c9.io) and Bootstrap (http://getbootstrap.com)
+By: Michael de Leon
+November 25, 2013
+-->
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <title>Twitter and AngularJS by Michael de Leon</title>
+        
+        <!-- jQuery before Angular.  jQuery gets used by Angular if available -->
+        <script src="js/jquery-1.10.2.min.js"></script>
+        <script src="js/angular.min.js"></script>
+        
+        <!-- Bootstrap core CSS -->
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+        
+        <!-- Custom styles for this template -->
+        <link href="css/main.css" rel="stylesheet">
+    </head>
+    
+    <body ng-controller="mainCtrl">
+
+        <!-- Title -->    
+        <div class="container col-lg-12">
+            <h1>Search Twitter <span id="author">by Michael de Leon</span></h1>
+        </div>
+
+        <div class="container col-lg-12">
+            <!-- main form -->
+            <form class="form-horizontal" role="form" id="mainform">
+                    
+                <!-- search terms input -->
+                <div class="form-group">
+                    <label for="searchTerm" class="col-lg-2 control-label">Search for:</label>
+                    <div class="col-lg-4">
+                        <input type="text" class="form-control" id="searchTerm" ng-model="searchTerm">
+                    </div>
+                    
+                    <!-- search button -->
+                    <div class="col-lg-4">
+                        <button type="submit" class="btn btn-default" id="searchButton" ng-click="addToSearchHistory()"><span class="glyphicon glyphicon-search"></span> Search</button>
+                    </div>
+                </div>
+            </form>
+        </div><!-- container -->
+
+        <!-- previous searches -->
+        <div class="container col-lg-12">
+            <div class="col-lg-2 control-label"><h4>Previous searches:</h4></div>
+            <div class="col-lg-8">
+                <a href="javascript:" class="searchHistory" ng-repeat="previousSearches in searchHistoryList" ng-click="usingSearchHistory()">{{previousSearches}}</a>
+            </div>
+        </div>
+        
+        <!-- results title -->
+        <div class="container col-lg-12">
+            <h3>Results</h3>
+        </div>
+        
+        <!-- errors if any -->
+        <div class="container col-lg-12" id="errors" ng-model="errors">
+            {{errors}}
+        </div>
+        
+        <!-- results list -->
+        <div class="container col-lg-12" id="resultsSection">
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="tweet in resultsList">
+                    <span id="twitterUser">{{tweet.user.name}}</span> --- <span id="twitterTweet">{{tweet.text}}</span>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- AngularJS by Michael De Leon-->
+        <script src="js/twittersearch.js"></script>
+        
+        <!-- Bootstrap core Javascript -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+    </body>
+    
+</html>
